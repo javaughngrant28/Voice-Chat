@@ -1,7 +1,7 @@
 
 local CharacterAPI = require(script.Parent.CharacterAPI)
 
-local LoadSignal = CharacterAPI._LoadSignal()
+local LoadSignal = CharacterAPI._GetLoadSignal()
 
 local function Load(player: Player)
     local existingCharacter = player.Character
