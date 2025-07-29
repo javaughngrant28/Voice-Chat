@@ -9,6 +9,9 @@
         "$className": "Folder",
         "$path": "src/shared"
       },
+      "Spaces": {
+        "$className": "Folder"
+      },
       "Events": {
         "$className": "Folder",
         "GENERAL": {
