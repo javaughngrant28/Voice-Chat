@@ -34,6 +34,9 @@ function SpaceGui:__Constructor(folder: Folder, screen: ScreenGui)
     self.Folder = folder
 
     self:_AutoCleanup()
+
+    local gui = self:_CreateGui()
+    gui.Parent = screen:FindFirstChildWhichIsA('ScrollingFrame',true)
 end
 
 function SpaceGui:_AutoCleanup()
@@ -55,6 +58,7 @@ function SpaceGui:_CreateGui(): GuiButton
     local members = self.Folder.Members:GetChildren()
     local HostPlayer = Host.Value or Players.LocalPlayer
     local HostImage = PlayerIcon.Get(HostPlayer)
+    local memberCount = #members
     
     local spaceGui = BUTTON_TEMPLATE:Clone()
     local spaceMembers = spaceGui.Members
@@ -65,16 +69,35 @@ function SpaceGui:_CreateGui(): GuiButton
     spaceGui.SpaceName.Text = self.Folder.Name
     spaceGui.HostPicture.Image = HostImage
 
-    if #members <= 0 then
+    if memberCount <= 0 then
         memberAmount.Text = `1`
         local pictureClone = pictureTemplate:Clone()
         pictureClone.Image = HostImage
         pictureClone.Parent = pictureTemplate.Parent
+        pictureClone.Visible = true
 
         else
-            memberAmount.Text = `{#memberAmount}`
+            memberAmount.Text = `{memberCount}`
 
-    end 
+            for i= memberCount, 1, -1 do
+
+                local playerMember = members[i] :: ObjectValue
+
+                if i == 1 and memberAmount == 4 then
+                    local dotsPictureClone = dotsPictureTemplate:Clone()
+                    dotsPictureClone.Image = PlayerIcon.Get(playerMember.Value)
+                    dotsPictureClone.Parent = dotsPictureTemplate.Parent
+                    dotsPictureClone.Visible = true
+
+                    else
+                        local pictureClone = pictureTemplate:Clone()
+                        pictureClone.Image = PlayerIcon.Get(playerMember.Value)
+                        pictureClone.Visible = true
+                        pictureClone.Parent = pictureTemplate.Parent
+                end
+            end
+
+    end
     
     return spaceGui
 end

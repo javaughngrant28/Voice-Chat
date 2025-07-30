@@ -9,22 +9,24 @@ local function CreateSpaceFolder(host: Player?,spaceName: string, mapName: strin
     members.Name = 'Members'
     members.Parent = folder
 
-    local host = Instance.new('ObjectValue')
-    host.Name = 'Host'
-    host.Value = host or nil
-    host.Parent = folder
+    local Host = Instance.new('ObjectValue')
+    Host.Name = 'Host'
+    Host.Value = host or nil
+    Host.Parent = folder
 
     local coHosts = Instance.new('Folder')
     coHosts.Name = 'CoHost'
     coHosts.Parent = folder
 
-    local welcomeMassge = Instance.new('StringValue')
-    welcomeMassge.Name = 'WelcomeMessage'
-    welcomeMassge.Parent = folder
+    local WelcomeMassge = Instance.new('StringValue')
+    WelcomeMassge.Name = 'WelcomeMessage'
+    WelcomeMassge.Value = welcomeMessage
+    WelcomeMassge.Parent = folder
 
-    local mapName = Instance.new('StringValue')
-    mapName.Name = 'MapName'
-    mapName.Parent = folder
+    local MapName = Instance.new('StringValue')
+    MapName.Name = 'MapName'
+    MapName.Value = mapName
+    MapName.Parent = folder
 
     return folder
 end
