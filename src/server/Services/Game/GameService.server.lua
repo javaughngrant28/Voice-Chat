@@ -17,8 +17,8 @@ CreateDefultSpaceFolder()
 
 local function JoinSpaceRequest(player: Player, folder: Folder)
     if folder == DEFULT_SPACE_FOLDER then
-        SpaceAPI.Create(player,DEFAUL_NAME,DEFAUL_MAP_NAME,DEFAUL_WELCOME_MESSAGE)
         DEFULT_SPACE_FOLDER:Destroy()
+        SpaceAPI.Create(player,DEFAUL_NAME,DEFAUL_MAP_NAME,DEFAUL_WELCOME_MESSAGE)
     end
 end
 

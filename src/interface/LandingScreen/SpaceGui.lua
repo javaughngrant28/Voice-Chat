@@ -2,6 +2,7 @@ local Players = game:GetService("Players")
 
 local MaidModule = require(game.ReplicatedStorage.Shared.Libraries.Maid)
 local PlayerIcon = require(script.Parent.Parent.Components.PlayerIcon)
+local RemoteUtil = require(game.ReplicatedStorage.Shared.Utils.RemoteUtil)
 
 local BUTTON_TEMPLATE = game.ReplicatedStorage.Assets.GuiElements.SpaceButtonTemplate
 
@@ -36,7 +37,17 @@ function SpaceGui:__Constructor(folder: Folder, screen: ScreenGui)
     self:_AutoCleanup()
 
     local gui = self:_CreateGui()
+    self._MAID['Gui'] = gui
     gui.Parent = screen:FindFirstChildWhichIsA('ScrollingFrame',true)
+
+    self._MAID['Activated Connection'] = gui.Activated:Connect(function()
+        self:_Clicked()
+    end)
+
+end
+
+function SpaceGui:_Clicked()
+    RemoteUtil.FireServer('JoinSpaceRequest',self.Folder)
 end
 
 function SpaceGui:_AutoCleanup()
@@ -103,7 +114,6 @@ function SpaceGui:_CreateGui(): GuiButton
 end
 
 function SpaceGui:Destroy()
-
     self._MAID:Destroy()
     for index, _ in pairs(self) do
          self[index] = nil
